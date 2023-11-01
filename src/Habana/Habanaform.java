@@ -4,11 +4,6 @@
  */
 package Habana;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -169,70 +164,29 @@ public class Habanaform extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        // cargamos un objeto habana para almacenar las reservas
        // aqui cargaríamos las reservas si por ejemplo las cogieramos de un fichero
-       this.recargaTablaReservas(this.habana);
+       this.recargaTablaReservas(this.getHabana());
     }//GEN-LAST:event_formWindowOpened
 
     private void nuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaReservaActionPerformed
         // TODO add your handling code here:
-        ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, 1, null);
+        ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, this.getHabana(), 1, 0);
         dialogo.setVisible(true);
-        
+        this.recargaTablaReservas(this.getHabana());
     }//GEN-LAST:event_nuevaReservaActionPerformed
 
     private void editaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaReservaActionPerformed
-        int = this.tableReservas.getSelectedRow()
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Date fecha;
-        try {
-            fecha = dateFormat.parse(strFecha);
-            ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, 2, fecha);
-            dialogo.setVisible(true);
-        } catch (ParseException ex) {
-            Logger.getLogger(Habanaform.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        int seleccion = this.tableReservas.getSelectedRow();
+        ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, this.getHabana(), 2, seleccion );
+        dialogo.setVisible(true);
+        this.recargaTablaReservas(this.getHabana());
     }//GEN-LAST:event_editaReservaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Habanaform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Habanaform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Habanaform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Habanaform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Habanaform dialog = new Habanaform(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                
-                dialog.setVisible(true);
-            }
-        });
+    private Habana getHabana() {
+        return habana;
+    }
+
+    private void setHabana(Habana habana) {
+        this.habana = habana;
     }
     
     protected void recargaTablaReservas( Habana habana )
@@ -244,7 +198,7 @@ public class Habanaform extends javax.swing.JDialog {
         modelo.setRowCount(0);
         // Recorrer el ArrayList y agregar cada objeto como una fila en el modelo
         for (ReservaHabana reserva : this.habana.getReservas() ) {
-            modelo.addRow(new Object[]{ reserva.getFecha().toString(), reserva.getNombre(), reserva.getTelefono()});
+            modelo.addRow(new Object[]{ reserva.getFecha().toString().substring(0, 10), reserva.getNombre(), reserva.getTelefono()});
         }
     }
 

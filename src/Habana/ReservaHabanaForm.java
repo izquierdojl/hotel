@@ -14,18 +14,47 @@ import javax.swing.JSpinner;
 public class ReservaHabanaForm extends javax.swing.JDialog {
 
     int modo; // modo de dialogo, 1 añadir 2 editar
-    Date fecha;
+    int seleccion; // registro seleccionado de la tabla
+    Habana habana; // objeto principal donde se guardan las reservas
+
     /**
      * Creates new form ReservaHabanaForm
      * @param parent
+     * @param habana Objeto principal donde se guardan las reservas
      * @param modo 1 añadir, 2 editar
-     * @param fecha Feha a editar
+     * @param seleccion Registro seleccionado de la tabla
      */
-    public ReservaHabanaForm(java.awt.Dialog parent, boolean modal, int modo, Date fecha) {
+    public ReservaHabanaForm(java.awt.Dialog parent, boolean modal, Habana habana, int modo, int seleccion ) {
         super(parent, modal);
         initComponents();
         this.modo = modo;
-        this.fecha = fecha;
+        this.seleccion = seleccion;
+        this.habana = habana;
+    }
+    
+
+    public int getModo() {
+        return modo;
+    }
+
+    public void setModo(int modo) {
+        this.modo = modo;
+    }
+
+    public int getSeleccion() {
+        return seleccion;
+    }
+
+    public void setSeleccion(int seleccion) {
+        this.seleccion = modo;
+    }
+    
+    public Habana getHabana() {
+        return habana;
+    }
+
+    public void setHabana(Habana habana) {
+        this.habana = habana;
     }
 
     /**
@@ -46,7 +75,7 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         comTipo = new javax.swing.JComboBox<>();
         labelTipo = new javax.swing.JLabel();
         labelPersonas = new javax.swing.JLabel();
-        spiPersonas1 = new javax.swing.JSpinner();
+        spiPersonas = new javax.swing.JSpinner();
         spiFecha = new javax.swing.JSpinner();
         labelFecha = new javax.swing.JLabel();
         LabelJornadas = new javax.swing.JLabel();
@@ -87,14 +116,19 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
 
         comTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Banquete", "Jornada", "Congreso" }));
         comTipo.setToolTipText("Seleccione el tipo de reserva");
+        comTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comTipoItemStateChanged(evt);
+            }
+        });
 
         labelTipo.setText("Tipo:");
 
         labelPersonas.setText("Personas:");
 
-        spiPersonas1.setModel(new javax.swing.SpinnerNumberModel(1, null, 80, 1));
-        spiPersonas1.setToolTipText("Introduzca el número de Jornadas");
-        spiPersonas1.setName("spiPersonas"); // NOI18N
+        spiPersonas.setModel(new javax.swing.SpinnerNumberModel(1, null, 80, 1));
+        spiPersonas.setToolTipText("Introduzca el número de Jornadas");
+        spiPersonas.setName("spiPersonas"); // NOI18N
 
         spiFecha.setModel(new javax.swing.SpinnerDateModel());
         spiFecha.setToolTipText("Fecha de la Reserva");
@@ -161,14 +195,14 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
                     .addGroup(panelFormLayout.createSequentialGroup()
                         .addComponent(labelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelFormLayout.createSequentialGroup()
                         .addGroup(panelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelTipo)
                             .addComponent(labelPersonas))
                         .addGap(31, 31, 31)
                         .addGroup(panelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spiPersonas1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spiPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         panelFormLayout.setVerticalGroup(
@@ -191,9 +225,9 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
                     .addComponent(labelTipo)
                     .addComponent(comTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(panelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spiPersonas1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPersonas))
+                .addGroup(panelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelPersonas)
+                    .addComponent(spiPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -216,11 +250,21 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("Pulse para cancelar las modificaciones de la freserva actual");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         panelBtn.add(btnCancelar, new java.awt.GridBagConstraints());
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setToolTipText("Pulse para guardar la reserva");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         panelBtn.add(btnGuardar, new java.awt.GridBagConstraints());
 
         getContentPane().add(panelBtn);
@@ -233,23 +277,86 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         // TODO add your handling code here:
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(this.spiFecha, "dd/MM/yyyy"); // Puedes cambiar el formato según tus preferencias
         this.spiFecha.setEditor(dateEditor);     
-        if ( this.modo==1 ) // añadir, 
+        this.LabelJornadas.setVisible(false);
+        this.spiJornadas.setVisible(false);
+        this.chkHabitaciones.setVisible(false);
+        if ( this.getModo()==1 ) // añadir, asignamos los valores por defecto
         {
            this.spiFecha.setValue(new Date());
+           this.radNoRest.setSelected(true);
         }
-        else
+        else if( this.getModo()==2 ) // editar
         {
+            
+        
             // editar cargamos el objeto guardado en el array list y asignamos sus datos
-            
-           
-            
+            this.textContacto.setText(this.getHabana().getReservas().get(seleccion).getNombre());
+            this.textTelefono.setText(this.getHabana().getReservas().get(seleccion).getTelefono());
+            this.comTipo.setSelectedIndex(this.getHabana().getReservas().get(seleccion).getTipo());
+            this.spiPersonas.setValue(this.getHabana().getReservas().get(seleccion).getPersonas());
+            switch (this.getHabana().getReservas().get(seleccion).getCocina())
+            {
+                case 'B':
+                    this.radBufe.setSelected(true);
+                    break;
+                case 'C':
+                    this.radCarta.setSelected(true);
+                    break;
+                case 'F':
+                    this.radChef.setSelected(true);
+                    break;
+                case 'N':
+                    this.radNoRest.setSelected(true);
+                    break;
+            }
+            this.spiJornadas.setValue(this.getHabana().getReservas().get(seleccion).getDias());
+            if( this.getHabana().getReservas().get(seleccion).getHabitaciones())
+              this.chkHabitaciones.setSelected(true);
         }
     }//GEN-LAST:event_formWindowOpened
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void comTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comTipoItemStateChanged
+        // TODO add your handling code here:
+        boolean visible = this.comTipo.getSelectedIndex() == 2; // seleccionado congreso
+        this.LabelJornadas.setVisible(visible);
+        this.spiJornadas.setVisible(visible);
+        this.chkHabitaciones.setVisible(visible);
+    }//GEN-LAST:event_comTipoItemStateChanged
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        ReservaHabana reserva = new ReservaHabana();
+        if ( this.getModo() == 2 ) // editamos, tomamos el valor del objeto pasado
+            reserva = this.getHabana().getReservas().get(seleccion);
+        reserva.setFecha((Date) this.spiFecha.getValue());
+        reserva.setNombre(this.textContacto.getText());
+        reserva.setTelefono(this.textTelefono.getText());
+        reserva.setTipo(this.comTipo.getSelectedIndex());
+        if(this.radBufe.isSelected())
+            reserva.setCocina('B');
+        else if ( this.radCarta.isSelected())
+            reserva.setCocina('C');
+        else if ( this.radChef.isSelected())
+            reserva.setCocina('F');
+        else if ( this.radChef.isSelected())
+            reserva.setCocina('N');
+        if ( this.comTipo.getSelectedIndex()!=2 )
+        {
+            reserva.setPersonas(0);
+            reserva.setHabitaciones(false);
+        }else{
+            reserva.setPersonas((int) this.spiPersonas.getValue() );
+            reserva.setHabitaciones(this.chkHabitaciones.isSelected());
+        }
+        if ( this.getModo() == 1 ) // aqui simplemente la añadimos a las reservas
+            this.getHabana().addReserva(reserva);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGuardarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelJornadas;
     private javax.swing.JButton btnCancelar;
@@ -271,7 +378,7 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
     private javax.swing.JRadioButton radNoRest;
     private javax.swing.JSpinner spiFecha;
     private javax.swing.JSpinner spiJornadas;
-    private javax.swing.JSpinner spiPersonas1;
+    private javax.swing.JSpinner spiPersonas;
     private javax.swing.JTextField textContacto;
     private javax.swing.JTextField textTelefono;
     // End of variables declaration//GEN-END:variables

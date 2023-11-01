@@ -15,11 +15,11 @@ public class ReservaHabana {
     Date fecha;
     String nombre;
     String telefono;
-    String tipo;
-    int habitaciones;
+    int tipo; // 1 Banquete  2 Jornada  3 Completo
+    boolean habitaciones;
     int personas;
     int dias;
-    String cocina;
+    char cocina; // B - Bufe  C - Carta  F - Chef  N - No Precisa
     
     public ReservaHabana() {
     }
@@ -30,13 +30,13 @@ public class ReservaHabana {
      * @param nombre Nombre de la reserva
      * @param telefono Teléfono de contacto
      * @param tipo Tipo de Reserva
-     * @param habitaciones Número de Habitaciones
+     * @param habitaciones Requiere Habitacines
      * @param personas Personas
      * @param dias Días
      * @param cocina Cocina
      */
     
-    public ReservaHabana(Date fecha, String nombre, String telefono, String tipo, int habitaciones, int personas, int dias, String cocina) {
+    public ReservaHabana(Date fecha, String nombre, String telefono, int tipo, boolean habitaciones, int personas, int dias, char cocina) {
         this.fecha = fecha;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -71,19 +71,19 @@ public class ReservaHabana {
         this.telefono = telefono;
     }
 
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
-    public int getHabitaciones() {
+    public boolean getHabitaciones() {
         return habitaciones;
     }
 
-    public void setHabitaciones(int habitaciones) {
+    public void setHabitaciones(boolean habitaciones) {
         this.habitaciones = habitaciones;
     }
 
@@ -103,11 +103,11 @@ public class ReservaHabana {
         this.dias = dias;
     }
 
-    public String getCocina() {
+    public char getCocina() {
         return cocina;
     }
 
-    public void setCocina(String cocina) {
+    public void setCocina(char cocina) {
         this.cocina = cocina;
     }
     

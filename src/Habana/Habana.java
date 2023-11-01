@@ -60,4 +60,10 @@ public class Habana {
         return fechas;
     }
     
+    public void addReserva( ReservaHabana reserva )
+    {
+        reservas.add(reserva);
+        
+    }
+    
 }
