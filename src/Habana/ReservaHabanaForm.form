@@ -50,11 +50,11 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="spiJornadas" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="chkHabitaciones" min="-2" pref="147" max="-2" attributes="0"/>
+                      <Component id="chkHabitaciones" min="-2" pref="185" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                      <EmptySpace min="4" max="32767" attributes="0"/>
                       <Component id="panelRestaurante" min="-2" pref="451" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -140,6 +140,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="labelContacto">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Contacto:"/>
           </Properties>
         </Component>
@@ -151,6 +154,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelTelefono">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
           </Properties>
         </Component>
@@ -179,11 +185,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelTipo">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Tipo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelPersonas">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Personas:"/>
           </Properties>
         </Component>
@@ -207,11 +219,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelFecha">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Fecha:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="LabelJornadas">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Jornadas:"/>
           </Properties>
         </Component>
@@ -222,6 +240,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkHabitaciones">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Requiere Habitaciones"/>
             <Property name="toolTipText" type="java.lang.String" value="Indique si requiere habitaciones"/>
           </Properties>
@@ -242,6 +263,9 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="grpRestaurante"/>
                 </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Verdana" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buf&#xe9;"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pulse para seleccionar buf&#xe9;"/>
               </Properties>
@@ -250,6 +274,9 @@
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="grpRestaurante"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Verdana" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Carta"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pulse para seleccionar carta"/>
@@ -260,6 +287,9 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="grpRestaurante"/>
                 </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Verdana" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Chef"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pulse para seleccionar chef"/>
               </Properties>
@@ -268,6 +298,9 @@
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="grpRestaurante"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Verdana" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="No Precisa"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pulse si no precisa servicio de restaurante"/>

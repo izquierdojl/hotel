@@ -89,6 +89,7 @@ public class Principal extends javax.swing.JFrame {
 
         toolHabana.setRollover(true);
 
+        btnHabana.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnHabana.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hotel.png"))); // NOI18N
         btnHabana.setText("Salón Habana");
         btnHabana.setToolTipText("Pulse para acceder a las reservas del salón Habana");
@@ -105,6 +106,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(toolHabana, java.awt.BorderLayout.PAGE_START);
 
         MenuHabana.setToolTipText("Opciones del Menú Principal");
+        MenuHabana.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         MenuHabana.setName("MenuPrincipal"); // NOI18N
 
         Menu1.setText("Principal");

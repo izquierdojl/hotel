@@ -5,6 +5,9 @@
     <Menu class="javax.swing.JMenuBar" name="MenuHabana">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Opciones del Men&#xfa; Principal"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Calibri" size="12" style="0"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="MenuPrincipal" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
@@ -133,6 +136,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnHabana">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Calibri" size="18" style="1"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/img/hotel.png"/>
             </Property>

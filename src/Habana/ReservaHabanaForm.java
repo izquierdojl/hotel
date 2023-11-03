@@ -105,11 +105,13 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         panelForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de la Reserva"));
         panelForm.setName(""); // NOI18N
 
+        labelContacto.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         labelContacto.setText("Contacto:");
 
         textContacto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         textContacto.setToolTipText("Introduzca la persona de contacto");
 
+        labelTelefono.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         labelTelefono.setText("Teléfono:");
 
         textTelefono.setToolTipText("Introduzca el teléfono de contacto");
@@ -122,8 +124,10 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
             }
         });
 
+        labelTipo.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         labelTipo.setText("Tipo:");
 
+        labelPersonas.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         labelPersonas.setText("Personas:");
 
         spiPersonas.setModel(new javax.swing.SpinnerNumberModel(1, null, 80, 1));
@@ -134,33 +138,40 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         spiFecha.setToolTipText("Fecha de la Reserva");
         spiFecha.setName("spiFecha"); // NOI18N
 
+        labelFecha.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         labelFecha.setText("Fecha:");
 
+        LabelJornadas.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         LabelJornadas.setText("Jornadas:");
 
         spiJornadas.setToolTipText("Introduzca el número de Jornadas");
 
+        chkHabitaciones.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         chkHabitaciones.setText("Requiere Habitaciones");
         chkHabitaciones.setToolTipText("Indique si requiere habitaciones");
 
         panelRestaurante.setBorder(javax.swing.BorderFactory.createTitledBorder("Servicio de Restaurante"));
 
         grpRestaurante.add(radBufe);
+        radBufe.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         radBufe.setText("Bufé");
         radBufe.setToolTipText("Pulse para seleccionar bufé");
         panelRestaurante.add(radBufe);
 
         grpRestaurante.add(radCarta);
+        radCarta.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         radCarta.setText("Carta");
         radCarta.setToolTipText("Pulse para seleccionar carta");
         panelRestaurante.add(radCarta);
 
         grpRestaurante.add(radChef);
+        radChef.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         radChef.setText("Chef");
         radChef.setToolTipText("Pulse para seleccionar chef");
         panelRestaurante.add(radChef);
 
         grpRestaurante.add(radNoRest);
+        radNoRest.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         radNoRest.setText("No Precisa");
         radNoRest.setToolTipText("Pulse si no precisa servicio de restaurante");
         panelRestaurante.add(radNoRest);
@@ -176,10 +187,10 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(spiJornadas, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFormLayout.createSequentialGroup()
-                    .addGap(4, 4, 4)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(panelFormLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
