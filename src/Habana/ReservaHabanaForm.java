@@ -280,15 +280,15 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         this.LabelJornadas.setVisible(false);
         this.spiJornadas.setVisible(false);
         this.chkHabitaciones.setVisible(false);
+        this.radNoRest.setSelected(true);
         if ( this.getModo()==1 ) // añadir, asignamos los valores por defecto
         {
            this.spiFecha.setValue(new Date());
            this.radNoRest.setSelected(true);
+           this.textContacto.requestFocus();
         }
         else if( this.getModo()==2 ) // editar
         {
-            
-        
             // editar cargamos el objeto guardado en el array list y asignamos sus datos
             this.textContacto.setText(this.getHabana().getReservas().get(seleccion).getNombre());
             this.textTelefono.setText(this.getHabana().getReservas().get(seleccion).getTelefono());
@@ -312,6 +312,7 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
             this.spiJornadas.setValue(this.getHabana().getReservas().get(seleccion).getDias());
             if( this.getHabana().getReservas().get(seleccion).getHabitaciones())
               this.chkHabitaciones.setSelected(true);
+            this.textContacto.requestFocus();
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -332,25 +333,28 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         // TODO add your handling code here:
         ReservaHabana reserva = new ReservaHabana();
         if ( this.getModo() == 2 ) // editamos, tomamos el valor del objeto pasado
+        {
             reserva = this.getHabana().getReservas().get(seleccion);
+        }
         reserva.setFecha((Date) this.spiFecha.getValue());
         reserva.setNombre(this.textContacto.getText());
         reserva.setTelefono(this.textTelefono.getText());
         reserva.setTipo(this.comTipo.getSelectedIndex());
+        reserva.setPersonas((int) this.spiPersonas.getValue() );
         if(this.radBufe.isSelected())
             reserva.setCocina('B');
         else if ( this.radCarta.isSelected())
             reserva.setCocina('C');
         else if ( this.radChef.isSelected())
             reserva.setCocina('F');
-        else if ( this.radChef.isSelected())
+        else if ( this.radNoRest.isSelected())
             reserva.setCocina('N');
         if ( this.comTipo.getSelectedIndex()!=2 )
         {
-            reserva.setPersonas(0);
+            reserva.setDias(0);
             reserva.setHabitaciones(false);
         }else{
-            reserva.setPersonas((int) this.spiPersonas.getValue() );
+            reserva.setDias((int) this.spiJornadas.getValue() );
             reserva.setHabitaciones(this.chkHabitaciones.isSelected());
         }
         if ( this.getModo() == 1 ) // aqui simplemente la añadimos a las reservas

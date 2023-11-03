@@ -4,6 +4,10 @@
  */
 package Habana;
 
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,6 +40,7 @@ public class Habanaform extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableReservas = new javax.swing.JTable();
         toolHabana = new javax.swing.JToolBar();
+        Salir = new javax.swing.JButton();
         nuevaReserva = new javax.swing.JButton();
         editaReserva = new javax.swing.JButton();
         borraReserva = new javax.swing.JButton();
@@ -79,6 +84,16 @@ public class Habanaform extends javax.swing.JDialog {
         });
         tableReservas.setToolTipText("Detalle de las reservas");
         tableReservas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableReservasMouseClicked(evt);
+            }
+        });
+        tableReservas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tableReservasKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableReservas);
 
         javax.swing.GroupLayout PanelHabanaLayout = new javax.swing.GroupLayout(PanelHabana);
@@ -99,9 +114,23 @@ public class Habanaform extends javax.swing.JDialog {
 
         toolHabana.setRollover(true);
 
+        Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir.png"))); // NOI18N
+        Salir.setText("Salir");
+        Salir.setToolTipText("Sal de la pantalla");
+        Salir.setFocusable(false);
+        Salir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Salir.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir.png"))); // NOI18N
+        Salir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
+        toolHabana.add(Salir);
+
         nuevaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anadir.png"))); // NOI18N
         nuevaReserva.setText("Añadir");
-        nuevaReserva.setToolTipText("Añade una nueva reserva");
+        nuevaReserva.setToolTipText("Añade una nueva reserva (Ins)");
         nuevaReserva.setFocusable(false);
         nuevaReserva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         nuevaReserva.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -114,7 +143,7 @@ public class Habanaform extends javax.swing.JDialog {
 
         editaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
         editaReserva.setText("Editar");
-        editaReserva.setToolTipText("Modifica la reserva seleccionada");
+        editaReserva.setToolTipText("Modifica la reserva seleccionada (ENTER)");
         editaReserva.setFocusable(false);
         editaReserva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         editaReserva.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -127,10 +156,15 @@ public class Habanaform extends javax.swing.JDialog {
 
         borraReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar.png"))); // NOI18N
         borraReserva.setText("Borrar");
-        borraReserva.setToolTipText("Borra la reserva seleccionada");
+        borraReserva.setToolTipText("Borra la reserva seleccionada (Supr)");
         borraReserva.setFocusable(false);
         borraReserva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         borraReserva.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        borraReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borraReservaActionPerformed(evt);
+            }
+        });
         toolHabana.add(borraReserva);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,18 +203,85 @@ public class Habanaform extends javax.swing.JDialog {
 
     private void nuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaReservaActionPerformed
         // TODO add your handling code here:
-        ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, this.getHabana(), 1, 0);
-        dialogo.setVisible(true);
-        this.recargaTablaReservas(this.getHabana());
+        this.nuevaReserva();
     }//GEN-LAST:event_nuevaReservaActionPerformed
 
     private void editaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaReservaActionPerformed
-        int seleccion = this.tableReservas.getSelectedRow();
-        ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, this.getHabana(), 2, seleccion );
-        dialogo.setVisible(true);
-        this.recargaTablaReservas(this.getHabana());
+        this.editaReserva();
     }//GEN-LAST:event_editaReservaActionPerformed
 
+    private void tableReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableReservasMouseClicked
+        // TODO add your handling code here:
+        if( evt.getClickCount()==2 )
+        {
+            this.editaReserva();
+        }
+    }//GEN-LAST:event_tableReservasMouseClicked
+
+    private void borraReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borraReservaActionPerformed
+        // TODO add your handling code here:
+        this.borraReserva();
+    }//GEN-LAST:event_borraReservaActionPerformed
+
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_SalirActionPerformed
+
+    private void tableReservasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableReservasKeyPressed
+        // TODO add your handling code here:
+        switch ( evt.getKeyCode() )
+        {
+            case KeyEvent.VK_INSERT:
+                this.nuevaReserva();
+                break;
+            case KeyEvent.VK_ENTER:
+                this.editaReserva();
+                break;
+            case KeyEvent.VK_DELETE:
+                this.borraReserva();
+                break;
+        }
+    }//GEN-LAST:event_tableReservasKeyPressed
+
+    private void nuevaReserva()
+    {
+        ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, this.getHabana(), 1, 0);
+        dialogo.setVisible(true);
+        this.recargaTablaReservas(this.getHabana());
+    }
+    
+    private void editaReserva()
+    {
+        int seleccion = this.tableReservas.getSelectedRow();
+        if ( this.tableReservas.isRowSelected(seleccion) ){
+          ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, this.getHabana(), 2, seleccion );
+          dialogo.setVisible(true);
+          this.recargaTablaReservas(this.getHabana());
+        }
+    }
+    
+    private void borraReserva()
+    {
+        int seleccion = this.tableReservas.getSelectedRow();
+        if ( this.tableReservas.isRowSelected(seleccion) ){
+            int opcion = JOptionPane.showOptionDialog(
+                this,                     // Componente padre (en este caso, nulo para un diálogo independiente)
+                "¿Seguro de borrar la reserva seleccionada?",   // Mensaje a mostrar
+                "Borrado de Registro",          // Título del cuadro de diálogo
+                JOptionPane.YES_NO_OPTION,// Tipo de opciones (Sí y No)
+                JOptionPane.QUESTION_MESSAGE, // Tipo de icono
+                null,                     // Icono personalizado (en este caso, nulo)
+                new Object[]{"Sí", "No"}, // Opciones personalizadas
+                "No");                    // Opción por defecto
+            if ( opcion == JOptionPane.YES_OPTION )
+            {
+                this.getHabana().getReservas().remove(seleccion);
+                this.recargaTablaReservas(this.getHabana());
+            }
+        }
+    }
+    
     private Habana getHabana() {
         return habana;
     }
@@ -191,19 +292,21 @@ public class Habanaform extends javax.swing.JDialog {
     
     protected void recargaTablaReservas( Habana habana )
     {  
-        
         // Obtener el modelo de la tabla
         DefaultTableModel modelo = (DefaultTableModel) this.tableReservas.getModel();
         // Limpiar el modelo (si es necesario)
         modelo.setRowCount(0);
         // Recorrer el ArrayList y agregar cada objeto como una fila en el modelo
         for (ReservaHabana reserva : this.habana.getReservas() ) {
-            modelo.addRow(new Object[]{ reserva.getFecha().toString().substring(0, 10), reserva.getNombre(), reserva.getTelefono()});
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaFormateada = formato.format(reserva.getFecha());        
+            modelo.addRow(new Object[]{ fechaFormateada , reserva.getNombre(), reserva.getTelefono()});
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelHabana;
+    private javax.swing.JButton Salir;
     private javax.swing.JButton borraReserva;
     private javax.swing.JButton editaReserva;
     private javax.swing.JScrollPane jScrollPane2;

@@ -44,26 +44,9 @@ public class Habana {
         this.reservas = reservas;
     }
     
-    /**
-     * Lista de reservas, pero en formato array
-     *
-     * @return String[] en formato listado de las reservas en fechas
-     * para asociarlos a un list
-     */
-    public String[] arrayReservas() {
-        String[] fechas = new String[this.reservas.size()];
-        int numeroReserva = 0; // para guardarlo en un array
-        for ( ReservaHabana reserva : this.reservas ) {
-            fechas[numeroReserva] = reserva.getFecha().toString();
-            numeroReserva++;
-        }
-        return fechas;
-    }
-    
     public void addReserva( ReservaHabana reserva )
     {
         reservas.add(reserva);
-        
     }
     
 }

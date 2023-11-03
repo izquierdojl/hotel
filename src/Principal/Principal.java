@@ -7,6 +7,7 @@ package Principal;
 import Habana.Habanaform;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,6 +49,7 @@ public class Principal extends javax.swing.JFrame {
         MenuHabana = new javax.swing.JMenuBar();
         Menu1 = new javax.swing.JMenu();
         Menu11 = new javax.swing.JMenuItem();
+        Menu12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplicación Hotel");
@@ -78,7 +80,7 @@ public class Principal extends javax.swing.JFrame {
         );
         Panel1Layout.setVerticalGroup(
             Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 237, Short.MAX_VALUE)
         );
 
         getContentPane().add(Panel1, java.awt.BorderLayout.CENTER);
@@ -87,11 +89,12 @@ public class Principal extends javax.swing.JFrame {
 
         toolHabana.setRollover(true);
 
+        btnHabana.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hotel.png"))); // NOI18N
         btnHabana.setText("Salón Habana");
+        btnHabana.setToolTipText("Pulse para acceder a las reservas del salón Habana");
         btnHabana.setActionCommand("habana");
         btnHabana.setFocusable(false);
-        btnHabana.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHabana.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHabana.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnHabana.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHabanaActionPerformed(evt);
@@ -116,6 +119,15 @@ public class Principal extends javax.swing.JFrame {
         });
         Menu1.add(Menu11);
         Menu11.getAccessibleContext().setAccessibleDescription("Reservas en el Salón Habana");
+
+        Menu12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        Menu12.setText("Salir");
+        Menu12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menu12ActionPerformed(evt);
+            }
+        });
+        Menu1.add(Menu12);
 
         MenuHabana.add(Menu1);
         Menu1.getAccessibleContext().setAccessibleName("Opciones");
@@ -146,6 +158,11 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
        this.btnHabanaActionPerformed(evt);
     }//GEN-LAST:event_Menu11ActionPerformed
+
+    private void Menu12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu12ActionPerformed
+        // TODO add your handling code here:
+        this.salir();
+    }//GEN-LAST:event_Menu12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,10 +198,26 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void salir()
+    {
+            int opcion = JOptionPane.showOptionDialog(
+                this,                     // Componente padre (en este caso, nulo para un diálogo independiente)
+                "¿Seguro de salir de la aplicación?",   // Mensaje a mostrar
+                "Salir de la Aplicación",          // Título del cuadro de diálogo
+                JOptionPane.YES_NO_OPTION,// Tipo de opciones (Sí y No)
+                JOptionPane.QUESTION_MESSAGE, // Tipo de icono
+                null,                     // Icono personalizado (en este caso, nulo)
+                new Object[]{"Sí", "No"}, // Opciones personalizadas
+                "No");                    // Opción por defecto
+            if ( opcion == JOptionPane.YES_OPTION )
+                System.exit(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Menu1;
     private javax.swing.JMenuItem Menu11;
+    private javax.swing.JMenuItem Menu12;
     private javax.swing.JMenuBar MenuHabana;
     private javax.swing.JPanel Panel1;
     private javax.swing.JButton btnHabana;
