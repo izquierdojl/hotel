@@ -4,6 +4,7 @@
  */
 package Principal;
 
+import Habana.Habana;
 import Habana.Habanaform;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -12,26 +13,29 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author jlizquierdo
+ * Clase Principal de la aplicación, con menú, tool bar y fondo de pantalla
  */
 public class Principal extends javax.swing.JFrame {
 
     javax.swing.JLabel backgroundLabel;
+    java.awt.Image imageFondo ;
+    Habana habana;
+    
     /**
-     * Creates new form Principal
+     * Crea el formulario principal
      */
     public Principal() {
         initComponents();
+        // cargo el objeto habana, para tener guardadas las reservas en toda la aplicacion
+        this.habana = new Habana();
         // Después de initComponents()
         // icono
         ImageIcon icon = new ImageIcon(getClass().getResource("/img/hotel.png")); // Reemplaza con la ruta correcta
         this.setIconImage(icon.getImage());        
         // imagen de fondo
-        java.awt.Image image = new javax.swing.ImageIcon(getClass().getResource("/img/fondo_hotel.jpg")).getImage();
-        image = image.getScaledInstance(this.Panel1.getWidth(), this.Panel1.getHeight(), java.awt.Image.SCALE_SMOOTH);
-        this.backgroundLabel = new javax.swing.JLabel(new javax.swing.ImageIcon(image));
-        this.Panel1.setOpaque(false);
-        this.Panel1.add(backgroundLabel);
-        backgroundLabel.setBounds(0, 0, this.Panel1.getWidth(), this.Panel1.getHeight());        
+        this.PanelHabana.setOpaque(false);
+        this.imageFondo = new javax.swing.ImageIcon(getClass().getResource("/img/fondo_hotel.jpg")).getImage();        
+        this.posFondo();
     }
 
     /**
@@ -43,7 +47,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Panel1 = new javax.swing.JPanel();
+        PanelHabana = new javax.swing.JPanel();
         toolHabana = new javax.swing.JToolBar();
         btnHabana = new javax.swing.JButton();
         MenuHabana = new javax.swing.JMenuBar();
@@ -58,34 +62,18 @@ public class Principal extends javax.swing.JFrame {
         setName("Principal"); // NOI18N
         setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(0, 0));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
-        Panel1.setName("Hotel Cuba"); // NOI18N
-        Panel1.setOpaque(false);
-        Panel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        PanelHabana.setName("HotelHabana"); // NOI18N
+        PanelHabana.setOpaque(false);
+        PanelHabana.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                Panel1ComponentResized(evt);
+                PanelHabanaComponentResized(evt);
             }
         });
-
-        javax.swing.GroupLayout Panel1Layout = new javax.swing.GroupLayout(Panel1);
-        Panel1.setLayout(Panel1Layout);
-        Panel1Layout.setHorizontalGroup(
-            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
-        );
-        Panel1Layout.setVerticalGroup(
-            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 237, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(Panel1, java.awt.BorderLayout.CENTER);
-        Panel1.getAccessibleContext().setAccessibleName("PanelPrincipal");
-        Panel1.getAccessibleContext().setAccessibleDescription("PanelPrincipal");
+        PanelHabana.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(PanelHabana, java.awt.BorderLayout.CENTER);
+        PanelHabana.getAccessibleContext().setAccessibleName("PanelPrincipal");
+        PanelHabana.getAccessibleContext().setAccessibleDescription("PanelPrincipal");
 
         toolHabana.setRollover(true);
 
@@ -141,20 +129,28 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-  
-    }//GEN-LAST:event_formWindowActivated
-
+    /**
+     * Posiciona la imagen de fondo en el panel, para que cada vez que se dimensiona el frame se posicione y redimensione 
+    */
+    private void posFondo()
+    {
+        this.imageFondo = this.imageFondo.getScaledInstance(this.PanelHabana.getWidth(), this.PanelHabana.getHeight(), java.awt.Image.SCALE_SMOOTH);
+        this.backgroundLabel = new javax.swing.JLabel(new javax.swing.ImageIcon(imageFondo));        
+        this.PanelHabana.removeAll();
+        this.PanelHabana.add(this.backgroundLabel);
+        this.backgroundLabel.setBounds(0, 0, this.PanelHabana.getWidth(), this.PanelHabana.getHeight());        
+    }
+    
     private void btnHabanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabanaActionPerformed
         // TODO add your handling code here:
-        Habanaform dialogo = new Habanaform(this,true);
+        Habanaform dialogo = new Habanaform(this,true,this.habana);
         dialogo.setVisible(true);
     }//GEN-LAST:event_btnHabanaActionPerformed
 
-    private void Panel1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_Panel1ComponentResized
+    private void PanelHabanaComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PanelHabanaComponentResized
         // TODO add your handling code here:
-        this.backgroundLabel.setBounds(0, 0, this.Panel1.getWidth(), this.Panel1.getHeight());        
-    }//GEN-LAST:event_Panel1ComponentResized
+        this.posFondo();
+    }//GEN-LAST:event_PanelHabanaComponentResized
 
     private void Menu11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu11ActionPerformed
         // TODO add your handling code here:
@@ -201,6 +197,9 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Método para controlar la salida de la aplicación
+     */
     private void salir()
     {
             int opcion = JOptionPane.showOptionDialog(
@@ -221,7 +220,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Menu11;
     private javax.swing.JMenuItem Menu12;
     private javax.swing.JMenuBar MenuHabana;
-    private javax.swing.JPanel Panel1;
+    private javax.swing.JPanel PanelHabana;
     private javax.swing.JButton btnHabana;
     private javax.swing.JToolBar toolHabana;
     // End of variables declaration//GEN-END:variables

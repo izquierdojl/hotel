@@ -10,6 +10,7 @@ import javax.swing.JSpinner;
 /**
  *
  * @author jlizquierdo
+ * Formulario de detalle de la reserva
  */
 public class ReservaHabanaForm extends javax.swing.JDialog {
 
@@ -32,6 +33,9 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         this.habana = habana;
     }
     
+    /**
+     * Getters y Setters
+     */
 
     public int getModo() {
         return modo;
@@ -283,6 +287,11 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    
+    /**
+     * Evento para controlar la apertura de la ventana, básicamente carga los datos cuando se añade o edita
+     * @param evt 
+     */
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -327,11 +336,21 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Controla el click del botón Cancelar
+     * @param evt 
+     */
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Controla el cambio del comboBox tipo, para mostrar u ocultar los campos requeridos
+     * @param evt 
+     */
+    
     private void comTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comTipoItemStateChanged
         // TODO add your handling code here:
         boolean visible = this.comTipo.getSelectedIndex() == 2; // seleccionado congreso
@@ -340,6 +359,10 @@ public class ReservaHabanaForm extends javax.swing.JDialog {
         this.chkHabitaciones.setVisible(visible);
     }//GEN-LAST:event_comTipoItemStateChanged
 
+    /**
+     * Controla el botón guardar, registra el objeto en la clase principal
+     * @param evt 
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         ReservaHabana reserva = new ReservaHabana();

@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  *
  * @author jlizquierdo
+ * Clase para gestionar las reservas
  */
 public class ReservaHabana {
     
@@ -46,6 +47,10 @@ public class ReservaHabana {
         this.dias = dias;
         this.cocina = cocina;
     }
+    
+    /**
+     * Getter y Setter
+    */
 
     public Date getFecha() {
         return fecha;

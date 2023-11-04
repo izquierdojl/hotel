@@ -13,17 +13,20 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author jlizquierdo
+ * Formulario que contiene la tabla de reservas, y las acciones
+ * Contiene un toolbar para el menú, y la tabla controla los eventos de teclado Ins, ENTER y Supr
  */
 public class Habanaform extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Habana
-     */
     Habana habana; // atributo objeto para controlar el formulario
     
-    public Habanaform(java.awt.Frame parent, boolean modal) {
+    /**
+     * Creates new form Habana
+     * @param Habana, objeto principal panel habana
+     */
+    public Habanaform(java.awt.Frame parent, boolean modal, Habana habana) {
         super(parent, modal);
-        this.habana = new Habana();
+        this.habana = habana;
         initComponents();
     }
 
@@ -195,21 +198,37 @@ public class Habanaform extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Controla la apertura de ventana, carga las reservas almacenadas
+     * @param evt
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        // cargamos un objeto habana para almacenar las reservas
        // aqui cargaríamos las reservas si por ejemplo las cogieramos de un fichero
        this.recargaTablaReservas(this.getHabana());
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Invoca nueva reserva
+     * @param evt
+     */
     private void nuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaReservaActionPerformed
         // TODO add your handling code here:
         this.nuevaReserva();
     }//GEN-LAST:event_nuevaReservaActionPerformed
 
+    /**
+     * Invoca la opción de editar reserva
+     * @param evt
+     */
     private void editaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaReservaActionPerformed
         this.editaReserva();
     }//GEN-LAST:event_editaReservaActionPerformed
 
+    /**
+     * Controla el doble-click de la tabla, para darle a editar
+     * @param evt
+     */
     private void tableReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableReservasMouseClicked
         // TODO add your handling code here:
         if( evt.getClickCount()==2 )
@@ -218,15 +237,27 @@ public class Habanaform extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tableReservasMouseClicked
 
+    /**
+     * Acción click del botón de borrar
+     * @param evt
+     */
     private void borraReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borraReservaActionPerformed
         // TODO add your handling code here:
         this.borraReserva();
     }//GEN-LAST:event_borraReservaActionPerformed
-
+    /**
+     * Acción click del botón de Salir
+     * @param evt
+     */
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_SalirActionPerformed
+
+    /**
+     * Controla los eventos del teclado de la tabla
+     * @param evt
+     */
 
     private void tableReservasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableReservasKeyPressed
         // TODO add your handling code here:
@@ -244,6 +275,10 @@ public class Habanaform extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tableReservasKeyPressed
 
+    /**
+     * Método para unificar la opción de nueva reserva
+     */
+    
     private void nuevaReserva()
     {
         ReservaHabanaForm dialogo = new ReservaHabanaForm(this, true, this.getHabana(), 1, 0);
@@ -251,6 +286,9 @@ public class Habanaform extends javax.swing.JDialog {
         this.recargaTablaReservas(this.getHabana());
     }
     
+    /**
+     * Método para unificar la opción de editar reserva
+     */
     private void editaReserva()
     {
         int seleccion = this.tableReservas.getSelectedRow();
@@ -261,6 +299,9 @@ public class Habanaform extends javax.swing.JDialog {
         }
     }
     
+    /**
+     * Método para unificar la opción de borrar reserva
+     */
     private void borraReserva()
     {
         int seleccion = this.tableReservas.getSelectedRow();
@@ -282,6 +323,9 @@ public class Habanaform extends javax.swing.JDialog {
         }
     }
     
+    /**
+     * getter y setter del objeto principal
+     */
     private Habana getHabana() {
         return habana;
     }
@@ -290,6 +334,11 @@ public class Habanaform extends javax.swing.JDialog {
         this.habana = habana;
     }
     
+    /**
+     * Método para recargar la tabla con las reservas
+     * @param Objeto principal Habana
+     */
+
     protected void recargaTablaReservas( Habana habana )
     {  
         // Obtener el modelo de la tabla
